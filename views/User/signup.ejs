@@ -1,0 +1,27 @@
+<% layout('Layout/boilerplate') -%>
+    <link rel="stylesheet" href="./styles/User/signup.css">
+    <form action="/signup" method="POST" id="signup">
+        <div class="card shadow mt-5">
+            <div class="card-header">Register</div>
+
+            <div class="card-body">
+                <label for="username" class="form-label mt-2">Username<span>*</span></label>
+                <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
+
+                <label for="email" class="form-label mt-2">E-mail<span>*</span> </label>
+                <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+
+                <label for="password" class="form-label mt-2">Password <span>*</span></label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                    required>
+
+                <label for="re-pass" class="form-label mt-2">Re-Enter Password <span>*</span></label>
+                <input type="password" class="form-control" id="re-pass" name="repass" placeholder="Password" required>
+                <p class="error-hidden" id="errorPass">Password not matched</p>
+
+                <button type="submit" id="register-button" class="btn btn-success mt-3 w-100">Register</button>
+            </div>
+        </div>
+    </form>
+
+    <script src="./scripts/validatePassword.js"></script>

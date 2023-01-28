@@ -1,0 +1,60 @@
+<div class="container">
+    <% if(sellBooks.length){ %>
+        <h1 class="text-center">Your Books on Sell</h1>
+        <% } %>
+            <div class="d-flex flex-wrap">
+                <% for(let book of sellBooks){ %>
+                    <div class="card m-3" style="width: 18rem; min-width: 250px;">
+                        <img src="<%= book.images[0].path %>" class="card-img-top" alt="Book_image">
+                        <div class="card-body">
+                            <h5 class="card-title">Book Title: <%= book.title %>
+                            </h5>
+                            <p class="card-text">Topic: <%= book.topic %>
+                            </p>
+                            <p class="card-text">Author Name: <%= book.author %>
+                            </p>
+                            <p class="card-text">Published Year: <%= book.year %>
+                            </p>
+                            <p class="card-text">ISBN No.: <%= book.isbn %>
+                            </p>
+                            <p class="card-text" id="card_price" style="font-weight: bolder; font-size: larger;">Price :
+                                ₹
+                                <%= book.price %>
+                            </p>
+                            <a href="/book/<%= book._id %>" class="btn btn-primary shadow-lg">See
+                                Book details</a>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+
+            <% if(buyBooks.length){ %>
+                <h1 class="text-center">Your Buyings</h1>
+                <% } %>
+                    <div class="d-flex flex-wrap">
+                        <% for(let book of buyBooks){ %>
+                            <div class="card m-3" style="width: 18rem; min-width: 250px;">
+                                <img src="<%= book.images[0].path %>" class="card-img-top" alt="Book_image">
+                                <div class="card-body">
+                                    <h5 class="card-title">Book Title: <%= book.title %>
+                                    </h5>
+                                    <p class="card-text">Topic: <%= book.topic %>
+                                    </p>
+                                    <p class="card-text">Author Name: <%= book.author %>
+                                    </p>
+                                    <p class="card-text">Published Year: <%= book.year %>
+                                    </p>
+                                    <p class="card-text">ISBN No.: <%= book.isbn %>
+                                    </p>
+                                    <p class="card-text" id="card_price"
+                                        style="font-weight: bolder; font-size: larger;">Price :
+                                        ₹
+                                        <%= book.price %>
+                                    </p>
+                                    <a href="/book/<%= book._id %>" class="btn btn-primary shadow-lg">See
+                                        Book details</a>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+</div>

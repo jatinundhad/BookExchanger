@@ -1,0 +1,26 @@
+#signup .card {
+  max-width: 500px;
+  width: 90%;
+}
+
+#signup .card-header {
+  font-size: 30px;
+}
+
+#signup {
+  display: flex;
+  justify-content: center;
+}
+
+#signup span {
+  color: red;
+}
+
+.error-visible {
+  color: red;
+  margin: 0;
+}
+
+.error-hidden {
+  display: none;
+}

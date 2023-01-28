@@ -1,0 +1,43 @@
+#search-form {
+  width: 90%;
+  display: block;
+}
+
+#search-form > input {
+  width: 100%;
+}
+
+#search-form > button {
+  width: 100%;
+  margin-top: 7px;
+}
+
+#auth {
+  list-style: none;
+  padding-left: 0;
+}
+
+.user-thumbnail .username {
+  margin-left: 11px;
+  font-weight: 400;
+  color: black;
+}
+
+.user-thumbnail {
+  text-decoration: none;
+}
+
+@media (min-width: 530px) {
+  #search-form {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+  }
+  #search-form > input {
+    width: 60%;
+  }
+  #search-form > button {
+    width: 20%;
+    margin-top: 0px;
+  }
+}

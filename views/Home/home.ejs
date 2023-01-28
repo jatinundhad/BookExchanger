@@ -1,0 +1,28 @@
+<% layout('Layout/boilerplate') -%>
+    <div class="container mt-4">
+        <h1 class="text-center">Welcome to Book Exchange</h1>
+        <div class="d-flex flex-wrap justify-content-around">
+            <% for(let book of books){ %>
+                <div class="card m-3" style="width: 18rem; min-width: 250px;">
+                    <img src="<%= book.images[0].path %>" class="card-img-top" alt="Book_image">
+                    <div class="card-body">
+                        <h5 class="card-title">Book Title: <%= book.title %>
+                        </h5>
+                        <p class="card-text">Topic: <%= book.topic %>
+                        </p>
+                        <p class="card-text">Author Name: <%= book.author %>
+                        </p>
+                        <p class="card-text">Published Year: <%= book.year %>
+                        </p>
+                        <p class="card-text">ISBN No.: <%= book.isbn %>
+                        </p>
+                        <p class="card-text" id="card_price" style="font-weight: bolder; font-size: larger;">Price : ₹
+                            <%= book.price %>
+                        </p>
+                        <a href="/book/<%= book._id %>" class="btn btn-primary shadow-lg">See
+                            Book details</a>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+    </div>

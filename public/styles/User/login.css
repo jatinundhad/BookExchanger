@@ -1,0 +1,17 @@
+#login .card {
+  max-width: 500px;
+  width: 90%;
+}
+
+#login .card-header {
+  font-size: 30px;
+}
+
+#login {
+  display: flex;
+  justify-content: center;
+}
+
+#login span {
+  color: red;
+}

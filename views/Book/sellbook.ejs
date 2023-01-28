@@ -1,0 +1,46 @@
+<% layout('Layout/boilerplate') -%>
+    <div class="container body-content">
+
+        <h2 class="text-center">Add Book for Sell</h2>
+
+        <div class="d-flex justify-content-center">
+            <form action="/sellbook/<%= currentUser._id %>" class="card mt-3 mb-5" method="POST"
+                enctype="multipart/form-data" style="max-width: 500px; width: 90%;">
+
+                <div class="card-body">
+                    <label for="isbn" class="form-label mt-2">Book ISBN</label>
+                    <input type="text" placeholder="Enter book ISBN" class="form-control" id="isbn" name="book[isbn]"
+                        required>
+
+                    <label for="title" class="form-label mt-2">Book Title</label>
+                    <input type="text" placeholder="Enter book Title" class="form-control" id="title" name="book[title]"
+                        required>
+
+                    <label for="year" class="form-label mt-2">Year Of Publication</label>
+                    <input type="text" placeholder="Enter Year Of Publication" class="form-control" id="year"
+                        name="book[year]" required>
+
+                    <label for="topic" class="form-label mt-2">Topic</label>
+                    <input type="text" placeholder="Enter Topic" class="form-control" id="topic" name="book[topic]"
+                        required>
+
+                    <label for="Author_Name" class="form-label mt-2">Author Name</label>
+                    <input type="text" placeholder="Enter Book Author Name " class="form-control" id="Author_Name"
+                        name="book[author]" required>
+
+                    <label for="price" class="form-label mt-2">Price</label>
+                    <input type="number" placeholder="Enter Book Price" class="form-control" id="price"
+                        name="book[price]" required>
+
+                    <label for="exampleFormControlFile1" class="form-label mt-2">Upload Image</label>
+                    <input type="file" class="form-control input-file" name="bookPhotos" id="exampleFormControlFile1"
+                        multiple required>
+
+                    <div class="d-flex mt-4">
+                        <button type="submit" class="btn btn-success p-2 w-100" id="done">Add Book</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>

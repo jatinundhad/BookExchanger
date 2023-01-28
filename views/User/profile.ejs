@@ -1,0 +1,26 @@
+<% layout("Layout/boilerplate.ejs") %>
+
+    <div class="container mt-0 mb-5">
+        <div class="row d-flex justify-content-center">
+            <%- include("uploadAvatar") %>
+
+                <div class="col ms-4 row">
+                    <% if(!profile.profileCompleted) { %>
+                        <div class="container d-flex justify-content-center" style="width: 50em;">
+                            <%- include("profileForm") %>
+                        </div>
+                </div>
+                <% } %>
+
+                    <% if(profile.profileCompleted){ %>
+                        <%- include("showProfile.ejs") %>
+                            <% } %>
+        </div>
+    </div>
+    </div>
+
+    <div>
+        <%- include("history") %>
+    </div>
+
+    <script src="/scripts/clientSideValidation.js"></script>
