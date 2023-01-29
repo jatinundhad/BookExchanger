@@ -15,7 +15,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/about">About</a>
         </li>
-        <% if(currentUser){%>
+        <% if(currentUser && currentUser.profileCompleted){%>
           <li class="nav-item">
             <a class="nav-link active" href="/sellbook">Sell Book</a>
           </li>

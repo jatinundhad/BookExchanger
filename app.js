@@ -16,8 +16,6 @@ import flash from "connect-flash";
 import ExpressError from "./utils/ExpressError.js";
 import AsyncCatch from "./utils/AsyncCatch.js";
 import methodOverride from "method-override";
-import multer from "multer";
-import { storage_user, storage_book, cloudinary } from "./cloudinary/index.js";
 import Book from "./models/Book.js";
 
 const app = express();
@@ -100,164 +98,17 @@ app.get(
   })
 );
 
-app.get(
-  "/profile/:id",
-  AsyncCatch(async (req, res) => {
-    const { id } = req.params;
-    const foundUser = await User.findById(id)
-      .populate("sellBooks")
-      .populate("buyBooks");
-
-    res.render("./User/profile", {
-      profile: foundUser,
-      address: foundUser.address,
-      sellBooks: foundUser.sellBooks,
-      buyBooks: foundUser.buyBooks,
-      search: false,
-    });
-  })
-);
-
-const upload = multer({ storage: storage_user });
-app.put(
-  "/upload/:id",
-  upload.single("profile"),
-  AsyncCatch(async (req, res, next) => {
-    const { id } = req.params;
-    const foundUser = await User.findById(id);
-    if (foundUser.avatar.filename !== "Profile_Photo.jpg") {
-      await cloudinary.uploader.destroy(foundUser.avatar.filename);
-    }
-    foundUser.avatar = { url: req.file.path, filename: req.file.filename };
-    await foundUser.save();
-    req.flash(
-      "success",
-      `${foundUser.username}, Your Avatar has been changed Successfully!!!`
-    );
-    res.redirect(`/profile/${id}`);
-  })
-);
-
-app.put(
-  "/profile/:id",
-  AsyncCatch(async (req, res) => {
-    const { id } = req.params;
-    const { user } = req.body;
-    const foundUser = await User.findById(id);
-    foundUser.name.firstName = user.firstName;
-    foundUser.name.lastName = user.lastName;
-    foundUser.phoneNo = user.phoneno;
-    foundUser.profileCompleted = true;
-    foundUser.address = {
-      houseNo: user.houseno,
-      street: user.street,
-      landmark: user.landmark,
-      city: user.city,
-      country: user.country,
-      pinCode: user.pincode,
-    };
-
-    const updatedProfile = await foundUser.save();
-    req.flash(
-      "success",
-      `${updatedProfile.username}, Your Profile is Ready!!!`
-    );
-    res.redirect(`/profile/${id}`);
-  })
-);
-
-app.get("/login", (req, res) => {
-  res.render("./User/login", { search: false });
-});
-
-app.get("/register", (req, res) => {
-  res.render("./User/signup", { search: false });
-});
-
 app.get("/about", (req, res) => {
   res.render("./about.ejs", { search: false });
 });
 
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    failureRedirect: "/login",
-    failureFlash: true,
-  }),
-  AsyncCatch((req, res) => {
-    req.flash("success", `Welcome again, ${req.session.passport.user}`);
-    res.redirect("/home");
-  })
-);
+// user routes
+import userRoutes from "./routes/user.js";
+app.use("/", userRoutes);
 
-app.post(
-  "/signup",
-  AsyncCatch(async (req, res, next) => {
-    try {
-      const { username, email, password } = req.body;
-      const user = new User({ username: username, email: email });
-      const registeredUser = await User.register(user, password);
-      req.login(registeredUser, (err) => {
-        if (err) return next(err);
-        req.flash("success", `Welcome ${registeredUser.username}`);
-        res.redirect("/home");
-      });
-    } catch (e) {
-      req.flash("error", e.message);
-      return res.redirect("/register");
-    }
-  })
-);
-
-app.post("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) return next(err);
-    req.flash("success", "See you soon!!!");
-    res.redirect("/home");
-  });
-});
-
-app.get("/sellbook", (req, res) => {
-  res.render("Book/sellbook", { search: false });
-});
-
-const uploadBookImage = multer({ storage: storage_book });
-app.post(
-  "/sellbook/:id",
-  uploadBookImage.array("bookPhotos"),
-  AsyncCatch(async (req, res, next) => {
-    const { id } = req.params;
-    const foundUser = await User.findById(id);
-
-    const newBook = new Book(req.body.book);
-    newBook.images = req.files.map((book) => ({
-      filename: book.filename,
-      path: book.path,
-    }));
-    newBook.seller = foundUser;
-    foundUser.sellBooks.push(newBook);
-
-    await foundUser.save();
-    await newBook.save();
-
-    res.redirect("/home");
-  })
-);
-
-app.get(
-  "/book/:id",
-  AsyncCatch(async (req, res, next) => {
-    const { id } = req.params;
-    const book = await Book.findById(id).populate("seller");
-    const seller = book.seller;
-    res.render("Book/book", {
-      book,
-      profile: seller,
-      address: seller.address,
-      search: false,
-    });
-  })
-);
+// book routes
+import bookRoutes from "./routes/book.js";
+app.use("/", bookRoutes);
 
 // show the page not found message for not existing route
 app.all("*", (req, res, next) => {
@@ -271,4 +122,5 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err });
 });
 
-app.listen(2000);
+const port = process.env.PORT || 3000;
+app.listen(port);

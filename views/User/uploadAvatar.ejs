@@ -11,9 +11,8 @@
         <form class="mt-4 d-flex ms-3 justify-content-center" action="/upload/<%= currentUser._id %>?_method=PUT"
             method="POST" enctype="multipart/form-data" style="width: 70%">
             <div class="form-group">
-                <input type="file" name="profile" id="input-files" class="form-control border" style="
-width: 287px;
-" />
+                <input type="file" name="profile" id="input-files" class="form-control border "
+                    style="min-width: 100px;" />
             </div>
             <button type="submit" class="btn btn-primary ms-3">Submit</button>
         </form>

@@ -1,7 +1,7 @@
 <% layout('Layout/boilerplate') -%>
     <div class="container mt-4">
         <h1 class="text-center">Welcome to Book Exchange</h1>
-        <div class="d-flex flex-wrap justify-content-around">
+        <div class="d-flex flex-wrap justify-content-start">
             <% for(let book of books){ %>
                 <div class="card m-3" style="width: 18rem; min-width: 250px;">
                     <img src="<%= book.images[0].path %>" class="card-img-top" alt="Book_image">
@@ -26,3 +26,7 @@
                 <% } %>
         </div>
     </div>
+
+
+    <p class="alert alert-primary container text-center"> Complete your profile befor Selling and Buying Books
+    </p>

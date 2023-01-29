@@ -11,7 +11,8 @@
 
 <% if(success && success.length){ %>
     <div class="alert alert-dismissible fade show shadow"
-        style="background-color: #9ef01a5f; width: 73%; position: fixed; z-index: 10; top: 10px;" role="alert">
+        style="background-color: #9ef01a5f; width: 73%; position: fixed; z-index: 5; top: 10px;" role="alert"
+        id="info-message">
         <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
             <use xlink:href=" #check-circle-fill" />
         </svg>
@@ -21,7 +22,8 @@
     <% } %>
         <% if(error && error.length){ %>
             <div class="alert alert-dismissible fade show shadow"
-                style="background-color: #ff002b55; width: 73%; position: fixed; z-index: 10;" role="alert">
+                style="background-color: #ff002b55; width: 73%; position: fixed; z-index: 5;" role="alert"
+                id="info-message">
                 <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:" width="24" height="24">
                     <use xlink:href="#exclamation-triangle-fill" />
                 </svg>
@@ -29,3 +31,5 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <% } %>
+
+                <script src="/scripts/flash.js"></script>
