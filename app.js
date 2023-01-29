@@ -91,7 +91,7 @@ app.use((req, res, next) => {
 
 // routes
 app.get(
-  "/home",
+  "/",
   AsyncCatch(async (req, res) => {
     const books = await Book.find({});
     res.render("./Home/home", { books: books, search: true });

@@ -31,7 +31,7 @@ router.post(
     await foundUser.save();
     await newBook.save();
 
-    res.redirect("/home");
+    res.redirect("/");
   })
 );
 
@@ -63,7 +63,7 @@ router.delete(
     }
     await User.findByIdAndUpdate(user_id, { $pull: { sellBooks: book_id } });
     req.flash("success", "Book has been deleted from sell Successfully!!!");
-    res.redirect("/home");
+    res.redirect("/");
   })
 );
 

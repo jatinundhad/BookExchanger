@@ -28,7 +28,7 @@ router.post(
   }),
   AsyncCatch((req, res) => {
     req.flash("success", `Welcome again, ${req.session.passport.user}`);
-    res.redirect("/home");
+    res.redirect("/");
   })
 );
 
@@ -42,7 +42,7 @@ router.post(
       req.login(registeredUser, (err) => {
         if (err) return next(err);
         req.flash("success", `Welcome ${registeredUser.username}`);
-        res.redirect("/home");
+        res.redirect("/");
       });
     } catch (e) {
       req.flash("error", e.message);
@@ -55,7 +55,7 @@ router.post("/logout", isLoggedIn, (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
     req.flash("success", "See you soon!!!");
-    res.redirect("/home");
+    res.redirect("/");
   });
 });
 
